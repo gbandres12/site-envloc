@@ -558,6 +558,7 @@ if(fine) document.querySelectorAll('[data-tilt]').forEach(c=>{
     const mobile=w<860;
     group.position.set(mobile?0:4.2, mobile?.6:0, 0);
     group.scale.setScalar(mobile?.72:1);
+    t1.visible=t2.visible=!mobile;
   }
   addEventListener('resize',layout); layout();
 
