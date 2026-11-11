@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENV LOC — O seu evento com a estrutura certa</title>
+<meta name="description" content="Locação e montagem de palcos, camarins, stands Octanorm, grades de contenção e contêineres em Santarém, oeste do Pará e norte do Mato Grosso. Grupo Almeida Engenharia.">
+<meta property="og:title" content="ENV LOC — O seu evento com a estrutura certa">
+<meta property="og:description" content="Estruturas para eventos e operações do oeste do Pará ao norte do Mato Grosso.">
+<meta property="og:image" content="assets/logo/logo-3d.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23141414'/%3E%3Cpath d='M10 30 32 14l22 16v6L32 20 10 36z' fill='%23A6A6A6'/%3E%3Cpath d='M10 44 32 28l22 16v6L32 34 10 50z' fill='%23F2B124'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#F2B124; --gold-hi:#FFD45C; --gold-lo:#B9851A;
+  --silver:#C9C9C9; --silver-lo:#8C8C8C;
+  --bg:#0E0E0F; --bg2:#151516; --card:#1B1B1D; --line:rgba(242,177,36,.22);
+  --text:#F4F4F4; --muted:#A3A3A3;
+  --gold-grad:linear-gradient(180deg,#FFE08A 0%,#F2B124 45%,#C8901C 100%);
+  --silver-grad:linear-gradient(180deg,#FFFFFF 0%,#D4D4D4 50%,#8E8E8E 100%);
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Montserrat,system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.display{font-family:"Archivo Black",Montserrat,sans-serif;text-transform:uppercase;letter-spacing:-.01em;line-height:.95}
+.gold{background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.silver{background:var(--silver-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.78rem;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+.tags{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.72rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#E8E8E8}
+.tags span+span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:14px;vertical-align:middle}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;font-weight:900;text-transform:uppercase;letter-spacing:.02em;font-size:.95rem;transition:transform .25s,box-shadow .25s}
+.btn-gold{background:var(--gold-grad);color:#121212;box-shadow:0 10px 30px -8px rgba(242,177,36,.6),inset 0 1px 0 rgba(255,255,255,.6)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 18px 40px -10px rgba(242,177,36,.8),inset 0 1px 0 rgba(255,255,255,.6)}
+.btn-ghost{border:1px solid rgba(255,255,255,.25);color:#fff}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn svg{width:18px;height:18px}
+
+/* Header */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,backdrop-filter .3s,border-color .3s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(14,14,15,.82);backdrop-filter:blur(14px);border-color:rgba(255,255,255,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+.logo{display:flex;flex-direction:column;align-items:center;line-height:1}
+.logo svg{width:44px;height:20px;margin-bottom:-2px}
+.logo b{font-family:"Archivo Black";font-size:1.55rem;letter-spacing:-.02em}
+.logo b i{font-style:normal;color:var(--gold)} .logo b em{font-style:normal;color:var(--silver);font-size:.82em}
+.menu{display:flex;gap:30px;font-size:.85rem;font-weight:600}
+.menu a{color:#cfcfcf;transition:color .2s} .menu a:hover{color:var(--gold)}
+.nav .btn{padding:11px 20px;font-size:.8rem}
+@media(max-width:860px){.menu{display:none}}
+
+/* Hero */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  background:radial-gradient(1200px 600px at 75% 60%,rgba(242,140,36,.22),transparent 60%),radial-gradient(800px 500px at 10% 0%,rgba(242,177,36,.08),transparent 60%),var(--bg)}
+#scene{position:absolute;inset:0;width:100%;height:100%}
+.hero-lines{position:absolute;inset:0;pointer-events:none;opacity:.55}
+.hero-content{position:relative;z-index:2;padding-top:90px;max-width:640px}
+.hero h1{font-size:clamp(2.6rem,7vw,5.6rem);margin:22px 0 24px}
+.hero p.lead{font-size:clamp(1rem,1.6vw,1.2rem);color:#d6d6d6;max-width:520px;margin-bottom:34px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:46px}
+.hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+.hero-stats div{border-left:2px solid var(--gold);padding-left:14px}
+.hero-stats strong{display:block;font-family:"Archivo Black";font-size:1.25rem}
+.hero-stats span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-size:.7rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase}
+@media(max-width:860px){.hero{align-items:flex-end;padding-bottom:70px}.hero-content{padding-top:46vh}#scene{height:60%}}
+
+/* Faixa */
+.marquee{border-block:1px solid var(--line);background:linear-gradient(90deg,#141414,#1a1710,#141414);overflow:hidden;padding:20px 0}
+.marquee-track{display:flex;gap:48px;width:max-content;animation:mq 30s linear infinite}
+.marquee-track span{font-family:"Archivo Black";text-transform:uppercase;font-size:1.3rem;color:#3a3a3a;white-space:nowrap;display:flex;align-items:center;gap:48px}
+.marquee-track span::after{content:"";width:14px;height:8px;background:var(--gold);clip-path:polygon(0 100%,50% 0,100% 100%,80% 100%,50% 40%,20% 100%)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{position:relative}
+.sec{padding:120px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:56px}
+.sec-head h2{font-size:clamp(2rem,4.6vw,3.6rem);margin-top:16px}
+.sec-head p{max-width:420px;color:var(--muted)}
+
+/* Produtos — cards 3D */
+.products{display:grid;grid-template-columns:repeat(6,1fr);gap:22px;perspective:1400px}
+.pcard{grid-column:span 2;position:relative;border-radius:var(--r);background:var(--card);border:1px solid rgba(255,255,255,.07);overflow:hidden;transform-style:preserve-3d;transition:transform .15s ease-out,border-color .3s;min-height:440px;display:flex;flex-direction:column;justify-content:flex-end}
+.pcard.big{grid-column:span 3;min-height:520px}
+.pcard:hover{border-color:var(--line)}
+.pcard .img{position:absolute;inset:0;background-size:cover;background-position:center 78%;transform:translateZ(-1px) scale(1.12);transition:transform .6s}
+.pcard:hover .img{transform:scale(1.18)}
+.pcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,15,.94) 0%,rgba(14,14,15,.2) 38%,rgba(14,14,15,.15) 55%,rgba(14,14,15,.96) 100%)}
+.pcard .glare{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(500px circle at var(--gx,50%) var(--gy,50%),rgba(255,214,120,.18),transparent 45%);opacity:0;transition:opacity .3s}
+.pcard:hover .glare{opacity:1}
+.pcard .body{position:relative;z-index:2;padding:28px;transform:translateZ(60px)}
+.pcard .num{position:absolute;top:24px;left:28px;z-index:2;font-family:"Archivo Black";font-size:.9rem;color:var(--gold);transform:translateZ(40px)}
+.pcard .kicker{font-size:.7rem;font-weight:800;letter-spacing:.3em;color:#e9e9e9;text-transform:uppercase}
+.pcard h3{font-size:clamp(1.8rem,3vw,2.5rem);margin:6px 0 10px}
+.pcard p{color:#cfcfcf;font-size:.95rem;margin-bottom:16px}
+.pcard .go{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.82rem;color:var(--gold);text-transform:uppercase;letter-spacing:.08em}
+.pcard .go svg{width:16px;transition:transform .25s}.pcard:hover .go svg{transform:translateX(5px)}
+@media(max-width:980px){.pcard,.pcard.big{grid-column:span 3}}
+@media(max-width:640px){.products{grid-template-columns:1fr}.pcard,.pcard.big{grid-column:auto;min-height:420px}}
+
+/* Região */
+.region{background:var(--bg2);overflow:hidden}
+.region-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
+.region h2{font-size:clamp(2rem,4.6vw,3.4rem);margin:16px 0 22px}
+.region p{color:var(--muted);margin-bottom:26px}
+.cities{display:flex;flex-wrap:wrap;gap:10px}
+.cities span{padding:8px 16px;border:1px solid rgba(255,255,255,.12);border-radius:999px;font-size:.82rem;font-weight:600;color:#ddd}
+.cities span.hl{border-color:var(--gold);color:var(--gold)}
+.map3d{perspective:1100px}
+.map3d .plane{transform:rotateX(52deg) rotateZ(-18deg);transform-style:preserve-3d;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+.map3d:hover .plane{transform:rotateX(40deg) rotateZ(-10deg)}
+.map3d svg{width:100%;height:auto;filter:drop-shadow(0 40px 40px rgba(0,0,0,.6))}
+.route{stroke-dasharray:10 10;animation:dash 1.4s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-20}}
+.pin{animation:pulse 2s ease-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes pulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
+@media(max-width:860px){.region-grid{grid-template-columns:1fr}}
+
+/* Processo */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{position:relative;padding:30px 24px 28px;border-radius:var(--r);background:linear-gradient(180deg,#1b1b1d,#141415);border:1px solid rgba(255,255,255,.06);overflow:hidden;transition:transform .3s,border-color .3s}
+.step:hover{transform:translateY(-6px);border-color:var(--line)}
+.step::before{counter-increment:s;content:"0" counter(s);font-family:"Archivo Black";font-size:3.6rem;line-height:1;position:absolute;right:14px;top:8px;color:rgba(255,255,255,.04)}
+.step .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(242,177,36,.1);border:1px solid var(--line);margin-bottom:18px;color:var(--gold)}
+.step .ic svg{width:22px;height:22px}
+.step h4{font-size:1.05rem;font-weight:800;margin-bottom:8px}
+.step p{font-size:.9rem;color:var(--muted)}
+@media(max-width:980px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* Valores / manifesto */
+.manifesto{padding:130px 0;text-align:center;background:radial-gradient(700px 360px at 50% 50%,rgba(242,177,36,.12),transparent 70%)}
+.manifesto blockquote{font-size:clamp(2rem,5.4vw,4.4rem);max-width:1000px;margin:20px auto 30px}
+.manifesto p{color:var(--muted);max-width:620px;margin:0 auto}
+.values{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.07);border-radius:var(--r);overflow:hidden;margin-top:70px;text-align:left}
+.values div{background:var(--bg);padding:28px 24px}
+.values strong{display:block;font-weight:800;margin-bottom:6px}
+.values strong::before{content:"";display:inline-block;width:10px;height:6px;margin-right:10px;background:var(--gold);clip-path:polygon(0 100%,50% 0,100% 100%,78% 100%,50% 45%,22% 100%)}
+.values span{font-size:.88rem;color:var(--muted)}
+@media(max-width:860px){.values{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.values{grid-template-columns:1fr}}
+
+/* Grupo */
+.group{padding:90px 0;border-top:1px solid rgba(255,255,255,.06)}
+.group-box{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center}
+.group-badge{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;border:1px solid var(--line);background:radial-gradient(circle at 30% 30%,#2a2416,#131313);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);animation:spin3d 10s ease-in-out infinite;transform-style:preserve-3d}
+.group-badge b{display:block;font-family:"Archivo Black";color:var(--gold);font-size:1.05rem;letter-spacing:0;margin:4px 0}
+@keyframes spin3d{0%,100%{transform:rotateY(-18deg)}50%{transform:rotateY(18deg)}}
+.group h3{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:12px}
+.group p{color:var(--muted);max-width:640px}
+@media(max-width:640px){.group-box{grid-template-columns:1fr;justify-items:start}}
+
+/* CTA */
+.cta{padding:40px 0 120px}
+.cta-box{position:relative;border-radius:28px;padding:clamp(40px,7vw,80px);overflow:hidden;background:linear-gradient(135deg,#1d1a12,#121212 60%);border:1px solid var(--line)}
+.cta-box::before{content:"";position:absolute;right:-80px;top:-60px;width:420px;height:420px;background:var(--gold);opacity:.12;filter:blur(90px)}
+.cta-box h2{font-size:clamp(2rem,5vw,3.8rem);max-width:760px;margin:16px 0 18px;position:relative}
+.cta-box p{color:#cfcfcf;max-width:560px;margin-bottom:32px;position:relative}
+.cta-box .actions{display:flex;gap:14px;flex-wrap:wrap;position:relative}
+.cta-chev{position:absolute;right:6%;bottom:-30px;width:min(340px,40%);opacity:.9;animation:float 6s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-14px) rotateX(10deg)}}
+@media(max-width:700px){.cta-chev{display:none}}
+
+footer{border-top:1px solid rgba(255,255,255,.06);padding:50px 0 40px;color:var(--muted);font-size:.88rem}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
+.foot a:hover{color:var(--gold)}
+.foot ul{list-style:none;display:grid;gap:8px}
+.foot h5{color:#fff;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px}
+.copy{margin-top:40px;font-size:.78rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* WhatsApp flutuante */
+.wa{position:fixed;right:20px;bottom:20px;z-index:60;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--gold-grad);color:#111;box-shadow:0 12px 30px -6px rgba(242,177,36,.6);transition:transform .25s}
+.wa:hover{transform:scale(1.08) rotate(-6deg)}
+.wa svg{width:28px;height:28px}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(40px) rotateX(8deg);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#" class="logo" aria-label="ENV LOC — início">
+      <svg viewBox="0 0 44 20"><path d="M2 9 22 0l20 9v3L22 3 2 12z" fill="#A6A6A6"/><path d="M2 17 22 8l20 9v3L22 11 2 20z" fill="#F2B124"/></svg>
+      <b><i>ENV</i><em>LOC</em></b>
+    </a>
+    <nav class="menu">
+      <a href="#estruturas">Estruturas</a>
+      <a href="#atuacao">Atuação</a>
+      <a href="#como-trabalhamos">Como trabalhamos</a>
+      <a href="#sobre">Sobre</a>
+    </nav>
+    <a class="btn btn-gold" href="#orcamento" data-wa>Orçamento</a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero">
+  <canvas id="scene" aria-hidden="true"></canvas>
+  <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="#F2B124" stroke-width="1" opacity=".35">
+      <path d="M0 140 L210 140 L340 270 L340 900"/><path d="M0 180 L190 180 L300 290 L300 900"/>
+      <path d="M1440 120 L1240 120 L1100 260 L1100 900" opacity=".5"/><path d="M1440 160 L1260 160 L1140 280 L1140 900" opacity=".5"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="eyebrow">Eventos · Negócios · Valor</span>
+      <h1 class="display"><span class="silver">O seu evento com a</span><br><span class="gold">estrutura certa.</span></h1>
+      <p class="lead">Locação e montagem de palcos, camarins, stands, grades e contêineres — planejadas, seguras e conferidas, do oeste do Pará ao norte do Mato Grosso.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#orcamento" data-wa>Solicite um orçamento
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m9 6 6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#estruturas">Ver estruturas</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong class="gold">5 linhas</strong><span>de estruturas</span></div>
+        <div><strong>PA → MT</strong><span>Região atendida</span></div>
+        <div><strong>Grupo Almeida</strong><span>Engenharia</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Role ↓</div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Palcos</span><span>Camarins</span><span>Stands Octanorm</span><span>Grades de contenção</span><span>Contêineres</span><span>Shows</span><span>Feiras</span><span>Obras</span>
+    <span>Palcos</span><span>Camarins</span><span>Stands Octanorm</span><span>Grades de contenção</span><span>Contêineres</span><span>Shows</span><span>Feiras</span><span>Obras</span>
+  </div>
+</div>
+
+<!-- ESTRUTURAS -->
+<section id="estruturas" class="sec">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Nossas estruturas</span>
+      <h2 class="display">Locação <span class="gold">sob medida</span><br>para cada formato</h2></div>
+      <p>Do show ao canteiro de obras: entregamos, montamos, conferimos com você e recolhemos no final. Você cuida do evento; a estrutura é com a gente.</p>
+    </div>
+
+    <div class="products">
+      <article class="pcard big rv" data-tilt>
+        <div class="img" style="background-image:url(assets/posts/palco.jpg);background-position:center 72%"></div>
+        <span class="num">01</span>
+        <div class="body">
+          <div class="tags"><span>Shows</span><span>Eventos</span><span>Apresentações</span></div>
+          <h3 class="display gold">Palco</h3>
+          <p>Estrutura em treliça com piso, escada e saia. O espaço para o seu evento acontecer.</p>
+          <a class="go" href="#" data-wa="palco">Orçar palco <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        </div><div class="glare"></div>
+      </article>
+
+      <article class="pcard big rv" data-tilt>
+        <div class="img" style="background-image:url(assets/posts/camarim.jpg);background-position:center 68%"></div>
+        <span class="num">02</span>
+        <div class="body">
+          <div class="tags"><span>Eventos</span><span>Shows</span><span>Produções</span></div>
+          <h3 class="display gold">Camarim</h3>
+          <p>Um espaço reservado e confortável para os bastidores da sua produção.</p>
+          <a class="go" href="#" data-wa="camarim">Orçar camarim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        </div><div class="glare"></div>
+      </article>
+
+      <article class="pcard rv" data-tilt>
+        <div class="img" style="background-image:url(assets/posts/stand-octanorm.jpg);background-position:center 70%"></div>
+        <span class="num">03</span>
+        <div class="body">
+          <div class="tags"><span>Feiras</span><span>Exposições</span></div>
+          <h3 class="display gold">Stand Octanorm</h3>
+          <p>Seu espaço em feiras e exposições, montado com padrão e acabamento.</p>
+          <a class="go" href="#" data-wa="stand Octanorm">Orçar stand <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        </div><div class="glare"></div>
+      </article>
+
+      <article class="pcard rv" data-tilt>
+        <div class="img" style="background-image:url(assets/posts/grades.jpg);background-position:center 74%"></div>
+        <span class="num">04</span>
+        <div class="body">
+          <div class="tags"><span>Acesso</span><span>Segurança</span></div>
+          <h3 class="display gold">Grades de contenção</h3>
+          <p>Organize acessos, filas e delimite áreas com segurança.</p>
+          <a class="go" href="#" data-wa="grades de contenção">Orçar grades <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        </div><div class="glare"></div>
+      </article>
+
+      <article class="pcard rv" data-tilt>
+        <div class="img" style="background-image:url(assets/posts/conteiner.jpg);background-position:center 66%"></div>
+        <span class="num">05</span>
+        <div class="body">
+          <div class="tags"><span>Obras</span><span>Eventos</span><span>Apoio</span></div>
+          <h3 class="display gold">Contêiner</h3>
+          <p>Espaço para sua operação: escritório, apoio, almoxarifado ou bilheteria.</p>
+          <a class="go" href="#" data-wa="contêiner">Orçar contêiner <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+        </div><div class="glare"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ATUAÇÃO -->
+<section id="atuacao" class="sec region">
+  <div class="wrap region-grid">
+    <div class="rv">
+      <span class="eyebrow">Onde atuamos</span>
+      <h2 class="display">Do <span class="gold">oeste do Pará</span><br>ao <span class="silver">norte do Mato Grosso</span></h2>
+      <p>Base em Santarém e logística planejada ao longo do eixo da BR-163. Antes de fechar, confirmamos disponibilidade, transporte, equipe e condições de montagem — prometemos só o que podemos cumprir.</p>
+      <div class="cities"><span class="hl">Santarém</span><span>Oeste do Pará</span><span>Eixo BR-163</span><span class="hl">Norte do Mato Grosso</span></div>
+    </div>
+    <div class="map3d rv">
+      <div class="plane">
+        <svg viewBox="0 0 500 500" aria-label="Rota de atendimento de Santarém (PA) ao norte do Mato Grosso">
+          <defs>
+            <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="rgba(242,177,36,.12)"/></pattern>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#C8901C"/></linearGradient>
+          </defs>
+          <rect x="10" y="10" width="480" height="480" rx="24" fill="#18181a" stroke="rgba(242,177,36,.35)"/>
+          <rect x="10" y="10" width="480" height="480" rx="24" fill="url(#grid)"/>
+          <!-- rio Amazonas estilizado -->
+          <path d="M10 92 C90 80 150 110 220 96 S360 70 490 88" fill="none" stroke="#2b3b4a" stroke-width="10" stroke-linecap="round"/>
+          <path d="M210 98 C200 160 230 220 215 300" fill="none" stroke="#2b3b4a" stroke-width="5" stroke-linecap="round"/>
+          <!-- divisa PA/MT -->
+          <path d="M10 330 L490 300" stroke="rgba(255,255,255,.18)" stroke-dasharray="4 6"/>
+          <text x="440" y="290" fill="#777" font-size="14" font-family="Montserrat" font-weight="700">PA</text>
+          <text x="440" y="335" fill="#777" font-size="14" font-family="Montserrat" font-weight="700">MT</text>
+          <!-- área atendida -->
+          <path d="M200 70 L330 90 L360 260 L330 460 L170 460 L150 260 Z" fill="rgba(242,177,36,.10)" stroke="rgba(242,177,36,.5)"/>
+          <!-- rota -->
+          <path class="route" d="M240 104 C270 170 250 230 270 290 S250 380 255 430" fill="none" stroke="url(#g1)" stroke-width="4" stroke-linecap="round"/>
+          <circle class="pin" cx="240" cy="104" r="9" fill="#F2B124"/>
+          <circle cx="240" cy="104" r="8" fill="#F2B124" stroke="#111" stroke-width="3"/>
+          <text x="256" y="112" fill="#fff" font-size="17" font-family="Archivo Black">SANTARÉM</text>
+          <circle class="pin" cx="255" cy="430" r="9" fill="#C9C9C9"/>
+          <circle cx="255" cy="430" r="8" fill="#C9C9C9" stroke="#111" stroke-width="3"/>
+          <text x="271" y="438" fill="#ddd" font-size="15" font-family="Archivo Black">NORTE DO MT</text>
+          <text x="282" y="270" fill="#F2B124" font-size="12" font-family="Montserrat" font-weight="800" letter-spacing="3">BR-163</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO TRABALHAMOS -->
+<section id="como-trabalhamos" class="sec">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Como trabalhamos</span>
+      <h2 class="display">Do planejamento<br><span class="gold">ao último parafuso</span></h2></div>
+      <p>Nosso trabalho começa no planejamento e só termina quando tudo foi entregue, recolhido e conferido.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div><h4>Planejar antes de prometer</h4><p>Confirmamos disponibilidade, transporte, equipe e condições do local antes de fechar.</p></div>
+      <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h4>Antecipar problemas</h4><p>Verificamos acesso, horários, interferências e necessidades do seu evento.</p></div>
+      <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 3 7v10l9 5 9-5V7z"/><path d="m3 7 9 5 9-5M12 12v10"/></svg></div><h4>Montagem segura</h4><p>Equipe preparada, equipamentos conferidos e segurança inegociável em cada etapa.</p></div>
+      <div class="step rv"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div><h4>Entrega conferida</h4><p>Checamos qualidade e escopo e registramos a entrega junto com você.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO + VALORES -->
+<section id="sobre" class="manifesto">
+  <div class="wrap">
+    <span class="eyebrow rv">Nosso princípio</span>
+    <blockquote class="display rv"><span class="silver">Não entregue nada</span> <span class="gold">menos que seu melhor.</span></blockquote>
+    <p class="rv">Damos estrutura a momentos que conectam pessoas e impulsionam negócios — com segurança, agilidade e qualidade, para que você tenha tranquilidade do começo ao fim.</p>
+    <div class="values rv">
+      <div><strong>Segurança inegociável</strong><span>Inspecionamos e corrigimos riscos antes de executar.</span></div>
+      <div><strong>Compromisso com o combinado</strong><span>Prazos que podemos cumprir; desvios comunicados cedo.</span></div>
+      <div><strong>Excelência na entrega</strong><span>Estruturas limpas, conservadas e conferidas.</span></div>
+      <div><strong>Versatilidade planejada</strong><span>Soluções adaptadas ao seu evento e ao seu espaço.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="group">
+  <div class="wrap group-box rv">
+    <div class="group-badge"><div>Uma empresa do<b>Grupo Almeida</b>Engenharia</div></div>
+    <div>
+      <h3 class="display">Respaldo de <span class="gold">engenharia</span> em cada estrutura</h3>
+      <p>A ENV LOC nasce do Grupo Almeida Engenharia e herda sua base: eficiência, agilidade, segurança estrutural e qualidade em tudo o que monta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="orcamento" class="cta">
+  <div class="wrap">
+    <div class="cta-box rv">
+      <span class="eyebrow">Orçamento</span>
+      <h2 class="display">Conte sobre o seu evento.<br><span class="gold">A estrutura certa é com a gente.</span></h2>
+      <p>Diga a data, o local e o que você precisa. Respondemos pelo WhatsApp com disponibilidade e proposta.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#" data-wa>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+          Chamar no WhatsApp</a>
+        <a class="btn btn-ghost" href="https://instagram.com/envloc" target="_blank" rel="noopener">@envloc</a>
+      </div>
+      <svg class="cta-chev" viewBox="0 0 200 120" aria-hidden="true">
+        <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE08A"/><stop offset="1" stop-color="#B9851A"/></linearGradient>
+        <linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#7d7d7d"/></linearGradient></defs>
+        <path d="M10 60 100 5l90 55v16L100 22 10 76z" fill="url(#cs)"/>
+        <path d="M10 98 100 43l90 55v16L100 60 10 114z" fill="url(#cg)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#" class="logo" style="align-items:flex-start">
+          <svg viewBox="0 0 44 20"><path d="M2 9 22 0l20 9v3L22 3 2 12z" fill="#A6A6A6"/><path d="M2 17 22 8l20 9v3L22 11 2 20z" fill="#F2B124"/></svg>
+          <b><i>ENV</i><em>LOC</em></b>
+        </a>
+        <p style="margin-top:12px;max-width:300px">O seu evento com a estrutura certa. Uma empresa do grupo <strong style="color:#fff">Almeida Engenharia</strong>.</p>
+      </div>
+      <div><h5>Estruturas</h5><ul><li>Palco</li><li>Camarim</li><li>Stand Octanorm</li><li>Grades de contenção</li><li>Contêiner</li></ul></div>
+      <div><h5>Contato</h5><ul>
+        <li><a href="#" data-wa>WhatsApp (93) 9919-1861</a></li>
+        <li><a href="https://instagram.com/envloc" target="_blank" rel="noopener">Instagram @envloc</a></li>
+        <li>Santarém (PA) ao norte do MT</li>
+      </ul></div>
+    </div>
+    <div class="copy"><span>© <span id="yr"></span> ENV LOC — Eventos, Negócios e Valor.</span><span>Santarém · Pará</span></div>
+  </div>
+</footer>
+
+<a class="wa" href="#" data-wa aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg>
+</a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ===== WhatsApp =====
+const WA_NUMBER = '559399191861'; // CONFIRMAR número completo
+document.querySelectorAll('[data-wa]').forEach(a=>{
+  const item = a.dataset.wa;
+  const msg = item ? `Olá, ENV LOC! Quero um orçamento de ${item}. Data do evento: ___ / Local: ___`
+                   : 'Olá, ENV LOC! Quero um orçamento. Data do evento: ___ / Local: ___ / Estruturas: ___';
+  a.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+  a.target = '_blank'; a.rel = 'noopener';
+});
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ===== Header =====
+const hdr = document.getElementById('top');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>30),{passive:true});
+
+// ===== Reveal =====
+const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)});
+
+// ===== Tilt 3D nos cards =====
+const fine = matchMedia('(pointer:fine)').matches;
+if(fine) document.querySelectorAll('[data-tilt]').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect(), x=(e.clientX-r.left)/r.width, y=(e.clientY-r.top)/r.height;
+    c.style.transform=`rotateY(${(x-.5)*12}deg) rotateX(${(.5-y)*10}deg) translateZ(0)`;
+    c.style.setProperty('--gx',x*100+'%'); c.style.setProperty('--gy',y*100+'%');
+  });
+  c.addEventListener('mouseleave',()=>{c.style.transform=''});
+});
+
+// ===== Cena 3D do hero =====
+(function(){
+  if(!window.THREE) return;
+  const canvas=document.getElementById('scene');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.outputEncoding=THREE.sRGBEncoding;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  const scene=new THREE.Scene();
+  const cam=new THREE.PerspectiveCamera(35,1,.1,100);
+  cam.position.set(0,0,14);
+
+  // Ambiente para reflexo metálico (gradiente quente gerado em canvas)
+  const ec=document.createElement('canvas'); ec.width=512; ec.height=256;
+  const g=ec.getContext('2d'); const gr=g.createLinearGradient(0,0,0,256);
+  gr.addColorStop(0,'#fff6dd'); gr.addColorStop(.35,'#ffb347'); gr.addColorStop(.55,'#2a1a08'); gr.addColorStop(1,'#050505');
+  g.fillStyle=gr; g.fillRect(0,0,512,256);
+  g.fillStyle='rgba(255,255,255,.9)'; g.fillRect(60,30,90,20); g.fillRect(340,40,120,14);
+  const envTex=new THREE.CanvasTexture(ec); envTex.mapping=THREE.EquirectangularReflectionMapping; envTex.encoding=THREE.sRGBEncoding;
+  const pmrem=new THREE.PMREMGenerator(renderer); const env=pmrem.fromEquirectangular(envTex).texture;
+  scene.environment=env;
+
+  // Chevron extrudado
+  function chevron(){
+    const s=new THREE.Shape(), w=3.2, h=1.9, t=.55;
+    s.moveTo(-w,0); s.lineTo(0,h); s.lineTo(w,0); s.lineTo(w,-t); s.lineTo(0,h-t*1.25); s.lineTo(-w,-t); s.closePath();
+    return new THREE.ExtrudeGeometry(s,{depth:.7,bevelEnabled:true,bevelThickness:.08,bevelSize:.06,bevelSegments:4});
+  }
+  const goldM=new THREE.MeshStandardMaterial({color:0xF2B124,metalness:1,roughness:.28,envMapIntensity:1.4});
+  const silvM=new THREE.MeshStandardMaterial({color:0xd8d8d8,metalness:1,roughness:.32,envMapIntensity:1.2});
+  const group=new THREE.Group();
+  const top=new THREE.Mesh(chevron(),silvM); top.position.y=.85;
+  const bot=new THREE.Mesh(chevron(),goldM); bot.position.y=-.55;
+  [top,bot].forEach(m=>{m.geometry.center();group.add(m)});
+  top.position.y=.75; bot.position.y=-.75;
+
+  // Arco dourado (o "palco" do logo)
+  const arc=new THREE.Mesh(new THREE.TorusGeometry(6,.06,16,120,Math.PI*.42),goldM);
+  arc.rotation.z=Math.PI/2-Math.PI*.21; arc.position.y=-7.9; arc.scale.set(1,1,.6);
+  group.add(arc);
+  scene.add(group);
+
+  // Treliças flutuantes (referência a box truss)
+  function truss(len){
+    const tg=new THREE.Group(), m=silvM, r=.045;
+    const corners=[[-.3,-.3],[.3,-.3],[.3,.3],[-.3,.3]];
+    corners.forEach(([x,z])=>{const c=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,8),m);c.position.set(x,0,z);tg.add(c)});
+    for(let y=-len/2;y<len/2;y+=.6){
+      for(let i=0;i<4;i++){
+        const a=corners[i], b=corners[(i+1)%4];
+        const p1=new THREE.Vector3(a[0],y,a[1]), p2=new THREE.Vector3(b[0],y+.6,b[1]);
+        const d=p2.clone().sub(p1), L=d.length();
+        const bar=new THREE.Mesh(new THREE.CylinderGeometry(r*.6,r*.6,L,6),m);
+        bar.position.copy(p1.clone().add(p2).multiplyScalar(.5));
+        bar.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());
+        tg.add(bar);
+      }
+    }
+    return tg;
+  }
+  const t1=truss(9); t1.position.set(-5.5,0,-4); t1.rotation.z=.15; scene.add(t1);
+  const t2=truss(7); t2.position.set(6.5,1,-6); t2.rotation.z=-.4; t2.rotation.x=.3; scene.add(t2);
+
+  // Partículas douradas
+  const N=260, pos=new Float32Array(N*3);
+  for(let i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*26;pos[i*3+1]=(Math.random()-.5)*16;pos[i*3+2]=(Math.random()-.5)*10-2}
+  const pg=new THREE.BufferGeometry(); pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0xFFC24A,size:.05,transparent:true,opacity:.8}));
+  scene.add(pts);
+
+  const key=new THREE.DirectionalLight(0xffd59a,2.2); key.position.set(5,6,8); scene.add(key);
+  const rim=new THREE.PointLight(0xff9a2e,30,30); rim.position.set(-6,-2,4); scene.add(rim);
+  scene.add(new THREE.AmbientLight(0xffffff,.15));
+
+  let mx=0,my=0;
+  addEventListener('pointermove',e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+
+  function layout(){
+    const w=canvas.clientWidth,h=canvas.clientHeight;
+    renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix();
+    const mobile=w<860;
+    group.position.set(mobile?0:4.2, mobile?.6:0, 0);
+    group.scale.setScalar(mobile?.72:1);
+  }
+  addEventListener('resize',layout); layout();
+
+  const clock=new THREE.Clock(); let visible=true;
+  new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(canvas);
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  (function loop(){
+    requestAnimationFrame(loop);
+    if(!visible) return;
+    const t=reduce?0:clock.getElapsedTime();
+    group.rotation.y += ((mx*.9 + Math.sin(t*.5)*.35) - group.rotation.y)*.05;
+    group.rotation.x += ((my*.4 + .12) - group.rotation.x)*.05;
+    top.position.y=.75+Math.sin(t*1.2)*.08; bot.position.y=-.75+Math.sin(t*1.2+1)*.08;
+    t1.rotation.y=t*.15; t2.rotation.y=-t*.12;
+    pts.rotation.y=t*.02; pts.position.y=Math.sin(t*.3)*.3;
+    cam.position.x += (mx*1.2-cam.position.x)*.03; cam.position.y += (-my*.8-cam.position.y)*.03; cam.lookAt(0,0,0);
+    renderer.render(scene,cam);
+  })();
+})();
+</script>
+</body>
+</html>
