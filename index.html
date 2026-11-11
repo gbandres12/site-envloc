@@ -61,6 +61,7 @@ header.scrolled{background:rgba(14,14,15,.82);backdrop-filter:blur(14px);border-
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
   background:radial-gradient(1200px 600px at 75% 60%,rgba(242,140,36,.22),transparent 60%),radial-gradient(800px 500px at 10% 0%,rgba(242,177,36,.08),transparent 60%),var(--bg)}
 #scene{position:absolute;inset:0;width:100%;height:100%}
+#velaris{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .hero-lines{position:absolute;inset:0;pointer-events:none;opacity:.55}
 .hero-content{position:relative;z-index:2;padding-top:90px;max-width:640px}
 .hero h1{font-size:clamp(2.6rem,7vw,5.6rem);margin:22px 0 24px}
@@ -208,6 +209,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:50px 0 40px;color:var(
 <main>
 <!-- HERO -->
 <section class="hero">
+  <canvas id="velaris" aria-hidden="true"></canvas>
   <canvas id="scene" aria-hidden="true"></canvas>
   <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
     <g fill="none" stroke="#F2B124" stroke-width="1" opacity=".35">
@@ -475,6 +477,48 @@ if(fine) document.querySelectorAll('[data-tilt]').forEach(c=>{
   c.addEventListener('mouseleave',()=>{c.style.transform=''});
 });
 
+// ===== Fundo Velaris (gradiente vivo em WebGL, nas cores da marca) =====
+(function(){
+  const canvas=document.getElementById('velaris');
+  const gl=canvas.getContext('webgl'); if(!gl) return;
+  const VS=`attribute vec2 position;varying vec2 vUv;void main(){vUv=position*.5+.5;gl_Position=vec4(position,0.,1.);}`;
+  const FS=`precision highp float;varying vec2 vUv;
+uniform vec2 u_resolution;uniform float u_time;uniform float u_grain;uniform vec3 u_colors[4];uniform vec3 u_bg;
+vec3 permute(vec3 x){return mod(((x*34.0)+1.0)*x,289.0);}
+float snoise(vec2 v){const vec4 C=vec4(0.211324865405187,0.366025403784439,-0.577350269189626,0.024390243902439);
+vec2 i=floor(v+dot(v,C.yy));vec2 x0=v-i+dot(i,C.xx);vec2 i1=(x0.x>x0.y)?vec2(1.0,0.0):vec2(0.0,1.0);
+vec4 x12=x0.xyxy+C.xxzz;x12.xy-=i1;i=mod(i,289.0);
+vec3 p=permute(permute(i.y+vec3(0.0,i1.y,1.0))+i.x+vec3(0.0,i1.x,1.0));
+vec3 m=max(0.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.0);m=m*m;m=m*m;
+vec3 x=2.0*fract(p*C.www)-1.0;vec3 h=abs(x)-0.5;vec3 ox=floor(x+0.5);vec3 a0=x-ox;
+m*=1.79284291400159-0.85373472095314*(a0*a0+h*h);vec3 g;g.x=a0.x*x0.x+h.x*x0.y;g.yz=a0.yz*x12.xz+h.yz*x12.yw;return 130.0*dot(m,g);}
+void main(){vec2 uv=vUv;float ratio=u_resolution.x/u_resolution.y;vec2 p=uv-0.5;p.x*=ratio;float t=u_time*0.1;
+float n1=snoise(p*0.4+vec2(t*0.2,-t*0.3));float n2=snoise(p*0.55+vec2(-t*0.15,t*0.25)+n1*0.25);float n3=snoise(p*0.75+vec2(t*0.1,-t*0.2)+n2*0.2);
+vec3 col=u_bg;float dist=length(p)*1.5;float vignette=1.0-smoothstep(0.3,1.2,dist);
+col=mix(col,u_colors[0],smoothstep(-0.2,0.5,n1)*0.85);col=mix(col,u_colors[1],smoothstep(-0.1,0.6,n2)*0.7);
+col=mix(col,u_colors[2],smoothstep(-0.3,0.4,n3)*0.6);col=mix(col,u_colors[3],smoothstep(0.0,0.7,n1*n2)*0.5);
+float glow=smoothstep(0.8,0.0,dist)*0.3;col+=u_colors[1]*glow;col=mix(col*0.2,col,vignette);
+float grain=fract(sin(dot(uv,vec2(12.9898,78.233)))*43758.5453+u_time);col+=(grain-0.5)*u_grain*0.1;
+gl_FragColor=vec4(col,1.0);}`;
+  const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,VS));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(pr);gl.useProgram(pr);
+  gl.bindBuffer(gl.ARRAY_BUFFER,gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const pos=gl.getAttribLocation(pr,'position');gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+  const U=n=>gl.getUniformLocation(pr,n);
+  const rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255);
+  // Paleta ENV LOC: carvão + âmbar/ouro discretos (mesma estética do hero)
+  const BG='#0E0E0F', COLORS=['#1a1307','#8a5f12','#2e1f08','#0E0E0F'], SPEED=1.6, GRAIN=.35;
+  gl.uniform3f(U('u_bg'),...rgb(BG));
+  gl.uniform3fv(U('u_colors'),new Float32Array(COLORS.flatMap(rgb)));
+  gl.uniform1f(U('u_grain'),GRAIN);
+  const resize=()=>{const d=Math.min(devicePixelRatio,2);canvas.width=canvas.clientWidth*d;canvas.height=canvas.clientHeight*d;gl.viewport(0,0,canvas.width,canvas.height);gl.uniform2f(U('u_resolution'),canvas.width,canvas.height)};
+  new ResizeObserver(resize).observe(canvas); resize();
+  let vis=true; new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(canvas);
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  (function r(t){requestAnimationFrame(r); if(!vis) return; gl.uniform1f(U('u_time'),still?20:t*.001*SPEED); gl.drawArrays(gl.TRIANGLE_STRIP,0,4)})(0);
+})();
+
 // ===== Cena 3D do hero =====
 (function(){
   if(!window.THREE) return;
@@ -556,8 +600,8 @@ if(fine) document.querySelectorAll('[data-tilt]').forEach(c=>{
     const w=canvas.clientWidth,h=canvas.clientHeight;
     renderer.setSize(w,h,false); cam.aspect=w/h; cam.updateProjectionMatrix();
     const mobile=w<860;
-    group.position.set(mobile?0:4.2, mobile?.6:0, 0);
-    group.scale.setScalar(mobile?.72:1);
+    group.position.set(mobile?0:4.2, mobile?1.9:0, 0);
+    group.scale.setScalar(mobile?.55:1);
     t1.visible=t2.visible=!mobile;
   }
   addEventListener('resize',layout); layout();
