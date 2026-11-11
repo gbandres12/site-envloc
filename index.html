@@ -107,6 +107,16 @@ section{position:relative}
 @media(max-width:980px){.pcard,.pcard.big{grid-column:span 3}}
 @media(max-width:640px){.products{grid-template-columns:1fr}.pcard,.pcard.big{grid-column:auto;min-height:420px}}
 
+/* Galeria real */
+.gallery{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:18px;perspective:1200px}
+.gallery figure{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid rgba(255,255,255,.08);aspect-ratio:3/4;transition:transform .5s,border-color .3s}
+.gallery figure:hover{transform:translateY(-8px) rotateX(4deg);border-color:var(--line)}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.gallery figure:hover img{transform:scale(1.06)}
+.gallery figcaption{position:absolute;inset:auto 0 0;padding:40px 20px 18px;background:linear-gradient(transparent,rgba(14,14,15,.92));font-size:.75rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase}
+.gallery figcaption::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-right:10px}
+@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr}.gallery figure:first-child{grid-column:span 2;aspect-ratio:4/3}}
+
 /* Região */
 .region{background:var(--bg2);overflow:hidden}
 .region-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:60px;align-items:center}
@@ -299,7 +309,7 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:50px 0 40px;color:var(
       </article>
 
       <article class="pcard rv" data-tilt>
-        <div class="img" style="background-image:url(assets/posts/conteiner.jpg);background-position:center 66%"></div>
+        <div class="img" style="background-image:url(assets/fotos/conteiner-icamento.webp);background-position:center 45%"></div>
         <span class="num">05</span>
         <div class="body">
           <div class="tags"><span>Obras</span><span>Eventos</span><span>Apoio</span></div>
@@ -313,6 +323,21 @@ footer{border-top:1px solid rgba(255,255,255,.06);padding:50px 0 40px;color:var(
 </section>
 
 <!-- ATUAÇÃO -->
+<section id="obras-reais" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="eyebrow">Na prática</span>
+      <h2 class="display">Contêineres <span class="gold">em operação</span></h2></div>
+      <p>Fotos reais de contêineres da ENV LOC: do içamento e transporte até a instalação pronta para uso.</p>
+    </div>
+    <div class="gallery">
+      <figure class="rv"><img src="assets/fotos/conteiner-icamento.webp" alt="Contêiner da ENV LOC sendo içado por caminhão munck" loading="lazy"><figcaption>Içamento e transporte</figcaption></figure>
+      <figure class="rv"><img src="assets/fotos/conteiner-instalado.jpg" alt="Contêiner escritório instalado sob tenda, porta e janela" loading="lazy"><figcaption>Instalado no local</figcaption></figure>
+      <figure class="rv"><img src="assets/fotos/conteiner-interno.jpg" alt="Interior do contêiner com piso, iluminação e ar-condicionado" loading="lazy"><figcaption>Interior climatizado</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <section id="atuacao" class="sec region">
   <div class="wrap region-grid">
     <div class="rv">
